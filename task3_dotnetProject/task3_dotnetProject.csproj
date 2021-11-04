@@ -6,8 +6,12 @@
 
   <ItemGroup>
     <None Remove="Services\" />
+    <None Remove="JSONmodels\" />
+    <None Remove="JSONmodels\JSONdatatypes\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="JSONmodels\" />
+    <Folder Include="JSONmodels\JSONdatatypes\" />
   </ItemGroup>
 </Project>

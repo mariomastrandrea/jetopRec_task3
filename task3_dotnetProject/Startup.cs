@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using task3_dotnetProject.JSONmodels;
 using task3_dotnetProject.Services;
 
 namespace task3_dotnetProject
@@ -29,6 +30,7 @@ namespace task3_dotnetProject
             services.AddControllers();
 
             services.AddSingleton<OWMforecastService>();
+            services.AddSingleton<JSONparser>();
 
             Uri OWMuri = new Uri("https://api.openweathermap.org/data/2.5/");
             services.AddHttpClient<OWMforecastService>(client => client.BaseAddress = OWMuri);

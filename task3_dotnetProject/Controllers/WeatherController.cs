@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using task3_dotnetProject.JSONmodels.JSONdatatypes;
 using task3_dotnetProject.Services;
 
 namespace task3_dotnetProject.Controllers
@@ -21,9 +22,11 @@ namespace task3_dotnetProject.Controllers
         }
 
         [HttpGet]
-        public Task<ActionResult<string>> GetAsync(string city, string date)
+        public async Task<ActionResult<string>> GetAsync(string city, string date)
         {
-            return null;
+            JSONcomponent jsonObj = await this.OWMservice.GetJSONWeatherForecasts(city);
+
+            return Ok(jsonObj.Print(0));
         }
     }
 }
