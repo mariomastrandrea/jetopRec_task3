@@ -88,5 +88,42 @@ namespace task3_dotnetProject.JSONmodels.JSONdatatypes
 
 			return this;
 		}
+
+		public override JSONarray RetrieveObjectsWithProperty(string key, string valueKeyword)
+		{
+			JSONarray result = new JSONarray();
+
+			foreach(string propertyKey in this.OrderedKeys)
+            {
+				JSONcomponent propertyValue = this.KeyValuePairProperties[propertyKey];
+
+				if(propertyKey.Equals(key) && propertyValue is JSONstring &&
+					((JSONstring)propertyValue).Contains(valueKeyword))
+				{
+					result.Add(this);
+					continue;
+                }
+
+				JSONarray subresult = propertyValue.RetrieveObjectsWithProperty(key, valueKeyword);
+				result.AddAll(subresult);
+            }
+
+			return result;
+		}
+
+		public override void RemoveObjectProperty(string key)
+		{
+			if(this.OrderedKeys.Contains(key))
+            {
+				this.OrderedKeys.Remove(key);
+				this.KeyValuePairProperties.Remove(key);
+			}
+
+			foreach(string propertyKey in this.OrderedKeys)
+            {
+				JSONcomponent propertyValue = this.KeyValuePairProperties[propertyKey];
+				propertyValue.RemoveObjectProperty(key);
+            }
+		}
 	}
 }

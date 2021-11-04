@@ -22,5 +22,20 @@ namespace task3_dotnetProject.JSONmodels.JSONdatatypes
 		{
 			return this;
 		}
-	}
+
+		public override JSONarray RetrieveObjectsWithProperty(string key, string valueKeyword)
+		{
+			return new JSONarray();
+		}
+
+		public bool Contains(string substring)
+        {
+			return this.Str.Contains(substring);
+        }
+
+        public override void RemoveObjectProperty(string key)
+        {
+			return;
+        }
+    }
 }

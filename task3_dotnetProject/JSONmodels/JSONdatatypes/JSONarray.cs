@@ -57,5 +57,30 @@ namespace task3_dotnetProject.JSONmodels.JSONdatatypes
 
 			return this;
 		}
+
+		public override JSONarray RetrieveObjectsWithProperty(string key, string valueKeyword)
+		{
+			JSONarray result = new JSONarray();
+
+			foreach(JSONcomponent element in this.Array)
+            {
+				JSONarray subresult = element.RetrieveObjectsWithProperty(key, valueKeyword);
+				result.AddAll(subresult);
+            }
+
+			return result;
+		}
+
+        public void AddAll(JSONarray array)
+        {
+			foreach (JSONcomponent element in array.Array)
+				this.Array.Add(element);
+        }
+
+		public override void RemoveObjectProperty(string key)
+		{
+			foreach (JSONcomponent element in this.Array)
+				element.RemoveObjectProperty(key);
+		}
 	}
 }
